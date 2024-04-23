@@ -27,6 +27,8 @@ def generate_synonyms(word, api_key, num_synonyms=5, sentence_count=2):
         return {"synonyms":synonyms, "sentences":synonym_sentences}
     except Exception as e:
         raise Exception(f"Error generating synonyms: {str(e)}")
+
+
 def generate_completion(prompt, api_key):
     headers = {
         "Content-Type": "application/json",
@@ -38,9 +40,10 @@ def generate_completion(prompt, api_key):
         "max_tokens": 100,
         "temperature": 0.7
     }
-    response = requests.post(OPENAI_API_URL, headers=headers, json=data=)
+    response = requests.post(OPENAI_API_URL, headers=headers, json=data)
     response_data = response.json()
     if response.status_code == 200:
+        print("success")
         return response_data["choices"][0]["text"]
     else:
         raise Exception(f"Error generating completion: {response_data.get('error', {}).get('message', 'Unknown error')}")
@@ -54,6 +57,8 @@ def handle_generate_synonyms():
     
     try: 
         synonyms_data = generate_synonyms(word, api_secret_key)
+        print("Synonyms data:", synonyms_data)
+        print("cheeseburger")
         return jsonify(synonyms_data),200
     except Exception as e:
         return jsonify({"error": str(e)}), 500
