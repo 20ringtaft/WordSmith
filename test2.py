@@ -23,3 +23,6 @@ completion = client.chat.completions.create(
 
 # Extract and print synonyms and their sentences
 print(completion.choices[0].message)
+sentence = completion.choices[0].message.content.split("\n")
+for line in sentence:
+    print(line)
