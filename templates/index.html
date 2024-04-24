@@ -1,22 +1,72 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Synonyms Generator</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordSmith</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0; /* Light grey background color */
+        }
+
+        .title-banner {
+            background-color: #a0ffa0; /* Lighter shade of lime green */
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #2e7037; /* Dark avocado green */
+            font-size: 46px; /* Increase font size by 14px */
+            font-weight: normal; /* Ensure font weight is normal */
+        }
+
+        .description {
+            font-size: 18px;
+            color: #555555;
+            margin-bottom: 30px;
+        }
+
+        .synonyms li {
+            font-size: 18px;
+            color: #333333;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>WordSmith</h1>
-    <form method="POST">
-        <label for="word">Enter a word:</label>
-        <input type="text" id="word" name="word" required>
-        <button type="submit">Generate Synonyms</button>
-    </form>
-    {% if lines %}
-        <h2>Synonyms for "{{ input_word }}"</h2>
-        <ul>
-            {% for line in lines %}
-                <li>{{ line }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="container">
+        <div class="title-banner">
+            <h1 class="display-4">WordSmith</h1>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p class="description">This webpage is for WordSmith, a service that helps users choose the best word while writing. Given a user input, it provides 5 synonyms along with example sentences for each synonym, allowing users to make informed decisions about their word choices.</p>
+                <form method="POST">
+                    <div class="form-group row">
+                        <label for="word" class="col-sm-3 col-form-label">Enter a word:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="word" name="word" required>
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="submit" class="btn btn-primary">Generate Synonyms</button>
+                        </div>
+                    </div>
+                </form>
+                {% if lines %}
+                <div class="synonyms">
+                    <h2>Synonyms for "{{ input_word }}"</h2>
+                    <ul>
+                        {% for line in lines %}
+                        <li>{{ line }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
