@@ -1,6 +1,6 @@
 from openai import OpenAI
 import json 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -14,7 +14,28 @@ PROMPT = read_json().get("prompt")
 client = OpenAI(
     api_key=OPENAI_API_KEY
 )
-@app.route('/generate', methods=['POST'])
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        input_word = request.form.get('word')
+        
+        completion = client.chat.completions.create(
+            model = "gpt-3.5-turbo",
+            messages = [
+                {"role": "system", "content": PROMPT},
+                {"role": "user", "content": input_word}
+            ]
+        )
+        
+        synonym_sentence = completion.choices[0].message.content.split("\n")
+        lines = [line.strip() for line in synonym_sentence if line.strip()]
+        
+        return render_template('index.html', lines=lines, input_word=input_word)
+    
+    return render_template('index.html')
+
+
+'''@app.route('/generate', methods=['POST'])
 def generate():
     input = request.json.get('word')
     
@@ -37,6 +58,6 @@ def generate():
     }
     
     return jsonify(response)
-
+'''
 if __name__ == "__main__":
     app.run(debug=True)

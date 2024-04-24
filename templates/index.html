@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Synonyms Generator</title>
+</head>
+<body>
+    <h1>WordSmith</h1>
+    <form method="POST">
+        <label for="word">Enter a word:</label>
+        <input type="text" id="word" name="word" required>
+        <button type="submit">Generate Synonyms</button>
+    </form>
+    {% if lines %}
+        <h2>Synonyms for "{{ input_word }}"</h2>
+        <ul>
+            {% for line in lines %}
+                <li>{{ line }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+</body>
+</html>
