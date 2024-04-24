@@ -34,30 +34,5 @@ def index():
     
     return render_template('index.html')
 
-
-'''@app.route('/generate', methods=['POST'])
-def generate():
-    input = request.json.get('word')
-    
-    completion = client.chat.completions.create(
-        model = "gpt-3.5-turbo",
-        messages = [
-            {"role": "system", "content": PROMPT},
-            #replace "strong" with user input
-            {"role": "user", "content": input}
-        ]
-    )
-    # Extract and print synonyms and their sentences
-    synonym_sentence = completion.choices[0].message.content.split("\n")
-    lines = []
-    for line in synonym_sentence:
-        lines.append(line.strip())
-    
-    response = {
-        "lines": lines
-    }
-    
-    return jsonify(response)
-'''
 if __name__ == "__main__":
     app.run(debug=True)
