@@ -14,7 +14,7 @@ PROMPT = read_json().get("prompt")
 client = OpenAI(
     api_key=OPENAI_API_KEY
 )
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/WordSmith', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
         input_word = request.form.get('word')

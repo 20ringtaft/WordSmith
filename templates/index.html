@@ -7,20 +7,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f0f0f0; /* Light grey background color */
+            background-color: #f0f0f0; 
         }
 
         .title-banner {
-            background-color: #a0ffa0; /* Lighter shade of lime green */
+            background-color: #a0ffa0; 
             padding: 20px 0;
             text-align: center;
             margin-bottom: 20px;
         }
 
         h1 {
-            color: #2e7037; /* Dark avocado green */
-            font-size: 46px; /* Increase font size by 14px */
-            font-weight: normal; /* Ensure font weight is normal */
+            color: #2e7037; 
+            font-size: 46px; 
+            font-weight: normal; 
         }
 
         .description {
@@ -46,15 +46,16 @@
                 <p class="description">This webpage is for WordSmith, a service that helps users choose the best word while writing. Given a user input, it provides 5 synonyms along with example sentences for each synonym, allowing users to make informed decisions about their word choices.</p>
                 <form method="POST">
                     <div class="form-group row">
-                        <label for="word" class="col-sm-3 col-form-label">Enter a word:</label>
+                        <label for="word" class="col-sm-3 col-form-label">Enter a word or phrase (max 2 words):</label>
                         <div class="col-sm-6">
-                            <input type="text" class="form-control" id="word" name="word" required>
+                            <input type="text" class="form-control" id="word" name="word" pattern="^\w+(\s+\w+)?$" title="Please enter up to two words" required>
                         </div>
                         <div class="col-sm-3">
                             <button type="submit" class="btn btn-primary">Generate Synonyms</button>
                         </div>
                     </div>
                 </form>
+                
                 {% if lines %}
                 <div class="synonyms">
                     <h2>Synonyms for "{{ input_word }}"</h2>
